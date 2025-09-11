@@ -13,8 +13,8 @@ type NoteType = {
 const NoteList = ({ note }: NoteListProps) => {
     return (
         <div>
-            <p>{note.title}</p>
-            <p>{note.priority}, {note.category}</p>
+            <p className="font-semibold text-xl">{note.title}</p>
+            <span className="text-sm px-2 bg-orange-500 rounded-full">{note.priority}</span> <span className="text-sm p-2 bg-orange-50 rounded-full">{note.category}</span>
             <p>{note.description}</p>
         </div>
 

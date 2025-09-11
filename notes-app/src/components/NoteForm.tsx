@@ -94,7 +94,7 @@ const NoteForm = ({ notes, setNotes }: NoteFormProps) => {
                     onChange={handleChange}
                 ></textarea>
             </div>
-            <button className="w-full bg-purple-500 text-white py-2 rounded-lg cursor-pointer hover:bg-purple-600">Add Note</button>
+            <button className="w-full bg-orange-500 text-white py-2 rounded-lg cursor-pointer hover:bg-purple-600">Add Note</button>
         </form>
     )
 }
