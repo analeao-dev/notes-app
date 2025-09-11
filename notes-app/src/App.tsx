@@ -1,5 +1,6 @@
 import { useState } from "react";
 import NoteForm from "./components/NoteForm";
+import NoteList from "./components/NoteList";
 
 type NoteType = {
   id: number,
@@ -20,11 +21,7 @@ const App = () => {
       </div>
       <div>
         {notes.map((note) => (
-          <div key={note.id}>
-            <p>{note.title}</p>
-            <p>{note.priority}, {note.category}</p>
-            <p>{note.description}</p>
-          </div>
+          <NoteList key={note.id} note={note}/>
         ))}
       </div>
     </>

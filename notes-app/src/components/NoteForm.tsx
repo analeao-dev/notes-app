@@ -45,8 +45,8 @@ const NoteForm = ({ notes, setNotes }: NoteFormProps) => {
         setFormData({
             id: 0,
             title: '',
-            category: 'Work',
-            priority: 'Medium',
+            category: 'Personal',
+            priority: 'Easy',
             description: ''
         })
     }
@@ -59,6 +59,7 @@ const NoteForm = ({ notes, setNotes }: NoteFormProps) => {
                 </label>
                 <input
                     name="title"
+                    id="title"
                     type="text"
                     className="w-full p-2 border rounded-lg"
                     value={formData.title}
@@ -67,7 +68,7 @@ const NoteForm = ({ notes, setNotes }: NoteFormProps) => {
             </div>
             <div className="mb-4">
                 <label htmlFor="priority" className="block font-semibold">Priority</label>
-                <select name="priority" className="w-full p-2 border rounded-lg" value={formData.priority} onChange={handleChange}>
+                <select name="priority" id="priority" className="w-full p-2 border rounded-lg" value={formData.priority} onChange={handleChange}>
                     <option value="Easy">🟢Easy</option>
                     <option value="Medium">🟡Medium</option>
                     <option value="Hard">🔴Hard</option>
