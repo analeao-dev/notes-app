@@ -1,43 +1,73 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-type PriorityType = 'Easy' | 'Medium' | 'Hard';
-type CategoryType = 'Work' | 'Personal' | 'Ideas';
-// type NoteType = {
-//     tile: string,
-//     priority: 'Easy' | 'Medium' | 'Hard',
-//     category: 'Work' | 'Personal' | 'Ideas',
-//     description: string
-// };
+type NoteFormProps = {
+    notes: NoteType[];
+    setNotes: React.Dispatch<React.SetStateAction<NoteType[]>>;
+};
 
-const NoteForm = () => {
-    const [title, setTitle] = useState<string>('');
-    const [priority, setPriority] = useState<PriorityType>('Easy');
-    const [category, setCategory] = useState<CategoryType>('Personal');
-    const [description, setDescription] = useState<string>('');
+type NoteType = {
+    id: number,
+    title: string,
+    priority: 'Easy' | 'Medium' | 'Hard',
+    category: 'Work' | 'Personal' | 'Ideas',
+    description: string
+};
 
-    // const [formData, setFormData] = useState<NoteType>({
-    //     tile: '',
-    //     priority:"Easy",
-    //     category: "Personal",
-    //     description: ''
-    // });
+const NoteForm = ({ notes, setNotes }: NoteFormProps) => {
+    const [formData, setFormData] = useState<NoteType>({
+        id: Date.now(),
+        title: '',
+        priority: "Easy",
+        category: "Personal",
+        description: ''
+    });
+
+    const handleChange = (e: React.ChangeEvent<{ name: string, value: any }>) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        })
+    }
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        // Validation
+        if (!formData.title || !formData.description) return;
+
+        // Create note object
+        const newNote = { ...formData };
+
+        // Add notes to state
+        setNotes([newNote, ...notes]);
+
+        // Reset form data
+        setFormData({
+            id: 0,
+            title: '',
+            category: 'Work',
+            priority: 'Medium',
+            description: ''
+        })
+    }
 
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <div className="mb-4">
                 <label htmlFor="title" className="block font-semibold">
                     Title
                 </label>
                 <input
+                    name="title"
                     type="text"
                     className="w-full p-2 border rounded-lg"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    value={formData.title}
+                    onChange={handleChange}
                 />
             </div>
             <div className="mb-4">
                 <label htmlFor="priority" className="block font-semibold">Priority</label>
-                <select className="w-full p-2 border rounded-lg" value={priority} onChange={(e) => setPriority(e.target.value as PriorityType)}>
+                <select name="priority" className="w-full p-2 border rounded-lg" value={formData.priority} onChange={handleChange}>
                     <option value="Easy">🟢Easy</option>
                     <option value="Medium">🟡Medium</option>
                     <option value="Hard">🔴Hard</option>
@@ -45,10 +75,10 @@ const NoteForm = () => {
             </div>
             <div className="mb-4">
                 <label htmlFor="category" className="block font-semibold">Category</label>
-                <select id="category" className="w-full p-2 border rounded-lg" value={category} onChange={(e) => setCategory(e.target.value as CategoryType)}>
-                    <option value="Easy">📂Work</option>
-                    <option value="Medium">🏡Personal</option>
-                    <option value="Hard">💡Ideas</option>
+                <select name="category" id="category" className="w-full p-2 border rounded-lg" value={formData.category} onChange={handleChange}>
+                    <option value="Work">📂Work</option>
+                    <option value="Personal">🏡Personal</option>
+                    <option value="Ideas">💡Ideas</option>
                 </select>
             </div>
             <div className="mb-4">
@@ -56,10 +86,11 @@ const NoteForm = () => {
                     Title
                 </label>
                 <textarea
+                    name="description"
                     id="description"
                     className="w-full p-2 border rounded-lg"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    value={formData.description}
+                    onChange={handleChange}
                 ></textarea>
             </div>
             <button className="w-full bg-purple-500 text-white py-2 rounded-lg cursor-pointer hover:bg-purple-600">Add Note</button>
