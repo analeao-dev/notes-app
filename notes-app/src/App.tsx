@@ -21,9 +21,7 @@ const App = () => {
       </div>
 
       {notes.map((note) => (
-        <div className="bg-gray-100 rounded-lg shadow-lg mb-4 p-6">
-          <NoteList key={note.id} note={note} />
-        </div>
+        <NoteList key={note.id} note={note} />
       ))}
 
     </div>
