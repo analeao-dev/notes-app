@@ -14,6 +14,7 @@ type NoteType = {
 };
 
 const NoteForm = ({ notes, setNotes }: NoteFormProps) => {
+    const [isFormVisible, setIsFormVisible] = useState(false);
     const [formData, setFormData] = useState<NoteType>({
         id: Date.now(),
         title: '',
@@ -52,50 +53,58 @@ const NoteForm = ({ notes, setNotes }: NoteFormProps) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-                <label htmlFor="title" className="block font-semibold">
-                    Title
-                </label>
-                <input
-                    name="title"
-                    id="title"
-                    type="text"
-                    className="w-full p-2 border rounded-lg"
-                    value={formData.title}
-                    onChange={handleChange}
-                />
-            </div>
-            <div className="mb-4">
-                <label htmlFor="priority" className="block font-semibold">Priority</label>
-                <select name="priority" id="priority" className="w-full p-2 border rounded-lg" value={formData.priority} onChange={handleChange}>
-                    <option value="Easy">🟢Easy</option>
-                    <option value="Medium">🟡Medium</option>
-                    <option value="Hard">🔴Hard</option>
-                </select>
-            </div>
-            <div className="mb-4">
-                <label htmlFor="category" className="block font-semibold">Category</label>
-                <select name="category" id="category" className="w-full p-2 border rounded-lg" value={formData.category} onChange={handleChange}>
-                    <option value="Work">📂Work</option>
-                    <option value="Personal">🏡Personal</option>
-                    <option value="Ideas">💡Ideas</option>
-                </select>
-            </div>
-            <div className="mb-4">
-                <label htmlFor="description" className="block font-semibold">
-                    Title
-                </label>
-                <textarea
-                    name="description"
-                    id="description"
-                    className="w-full p-2 border rounded-lg"
-                    value={formData.description}
-                    onChange={handleChange}
-                ></textarea>
-            </div>
-            <button className="w-full bg-orange-500 text-white py-2 rounded-lg cursor-pointer hover:bg-purple-600">Add Note</button>
-        </form>
+        <>
+            <button onClick={() => setIsFormVisible(!isFormVisible)} className="w-full bg-orange-100 border border-orange-300 text-orange-800 py-2 rounded-lg cursor-pointer hover:bg-orange-200 hover:border-orange-300 transition mb-4">
+                {isFormVisible ? 'Hide Form ✖️' : 'Add New Note ➕'}
+            </button>
+            {isFormVisible && (
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-4">
+                        <label htmlFor="title" className="block font-semibold">
+                            Title
+                        </label>
+                        <input
+                            name="title"
+                            id="title"
+                            type="text"
+                            className="w-full p-2 border rounded-lg"
+                            value={formData.title}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="priority" className="block font-semibold">Priority</label>
+                        <select name="priority" id="priority" className="w-full p-2 border rounded-lg" value={formData.priority} onChange={handleChange}>
+                            <option value="Easy">🟢Easy</option>
+                            <option value="Medium">🟡Medium</option>
+                            <option value="Hard">🔴Hard</option>
+                        </select>
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="category" className="block font-semibold">Category</label>
+                        <select name="category" id="category" className="w-full p-2 border rounded-lg" value={formData.category} onChange={handleChange}>
+                            <option value="Work">📂Work</option>
+                            <option value="Personal">🏡Personal</option>
+                            <option value="Ideas">💡Ideas</option>
+                        </select>
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="description" className="block font-semibold">
+                            Title
+                        </label>
+                        <textarea
+                            name="description"
+                            id="description"
+                            className="w-full p-2 border rounded-lg"
+                            value={formData.description}
+                            onChange={handleChange}
+                        ></textarea>
+                    </div>
+                    <button className="w-full bg-orange-500 text-white py-2 rounded-lg cursor-pointer hover:bg-purple-600">Add Note</button>
+                </form>
+            )}
+
+        </>
     )
 }
 
