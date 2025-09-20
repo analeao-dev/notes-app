@@ -5,19 +5,19 @@ type TextInputProps = {
 } & InputHTMLAttributes<HTMLInputElement>;
 
 
-const TextInput = ({ label, name, id, value, onChange, ...rest }: TextInputProps) => {
+const TextInput = ({ label, name, value, onChange, required = false }: TextInputProps) => {
     return (
         <div className="mb-4">
-            <label htmlFor="title" className="block font-semibold">
+            <label htmlFor={name} className="block font-semibold">
                 {label}
             </label>
             <input
                 name={name}
-                id={id}
                 type="text"
                 className="w-full p-2 border rounded-lg"
                 value={value}
-                onChange={ }
+                onChange={onChange}
+                required={required}
             />
         </div>
     );

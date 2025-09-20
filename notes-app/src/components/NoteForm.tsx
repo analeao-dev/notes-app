@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TextInput from "./inputs/TextInput";
+import Select from "./inputs/Select";
 
 type NoteFormProps = {
     notes: NoteType[];
@@ -23,6 +24,13 @@ const NoteForm = ({ notes, setNotes }: NoteFormProps) => {
         category: "Personal",
         description: ''
     });
+
+    const priorityOptions = [
+        { value: 'Easy', label: '🟢Easy' },
+        { value: 'Medium', label: '🟡Medium' },
+        { value: 'Hard', label: '🔴Hard' },
+    ];
+
 
     const handleChange = (e: React.ChangeEvent<{ name: string, value: any }>) => {
         setFormData({
@@ -60,15 +68,8 @@ const NoteForm = ({ notes, setNotes }: NoteFormProps) => {
             </button>
             {isFormVisible && (
                 <form onSubmit={handleSubmit}>
-                    <TextInput />                
-                    <div className="mb-4">
-                        <label htmlFor="priority" className="block font-semibold">Priority</label>
-                        <select name="priority" id="priority" className="w-full p-2 border rounded-lg" value={formData.priority} onChange={handleChange}>
-                            <option value="Easy">🟢Easy</option>
-                            <option value="Medium">🟡Medium</option>
-                            <option value="Hard">🔴Hard</option>
-                        </select>
-                    </div>
+                    <TextInput label="Title" name="title" value={formData.title} onChange={handleChange} required />
+                    <Select label="Priority" name="priority" options={priorityOptions} onChange={handleChange} />
                     <div className="mb-4">
                         <label htmlFor="category" className="block font-semibold">Category</label>
                         <select name="category" id="category" className="w-full p-2 border rounded-lg" value={formData.category} onChange={handleChange}>
