@@ -13,6 +13,7 @@ const TextInput = ({ label, name, value, onChange, required = false }: TextInput
             </label>
             <input
                 name={name}
+                id={name}
                 type="text"
                 className="w-full p-2 border rounded-lg"
                 value={value}

@@ -30,7 +30,7 @@ const NoteList = ({ notes }: NoteListProps) => {
             : (
                 <div className="space-y-4">
                     {notes.map((note) => (
-                        <div className={`bg-gray-100 rounded-lg shadow-lg my-4 p-4 border-l-4 
+                        <div key={note.id} className={`bg-gray-100 rounded-lg shadow-lg my-4 p-4 border-l-4 
                         ${note.priority === 'Easy' ? 'border-green-300' : note.priority === 'Medium' ? 'border-yellow-300' : 'border-red-300'}`}>
                             <p className="font-semibold text-xl pb-1">{note.title}</p>
                             <div className="flex gap-2 pb-4">

@@ -15,7 +15,7 @@ const Select = ({ label, name, options, required = false, ...rest }: SelectProps
 
         <div className="mb-4">
             <label htmlFor={name} className="block font-semibold">{label}</label>
-            <select name={name} className="w-full p-2 border rounded-lg" required={required} {...rest}>
+            <select name={name} id={name} className="w-full p-2 border rounded-lg" required={required} {...rest}>
                 {options.map((option) => (
                     <option key={option.value} value={option.value}>{option.label}</option>
                 ))}
