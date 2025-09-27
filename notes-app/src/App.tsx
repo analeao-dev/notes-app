@@ -12,6 +12,15 @@ type NoteType = {
 
 const App = () => {
   const [notes, setNotes] = useState<NoteType[]>([]);
+
+  // "Delete" notes
+  const handleDeleteNote = (id: number) => {
+    const confirmDelete = window.confirm('Are you sure want to delete this note?');
+    if (confirmDelete) {
+      setNotes(notes.filter((note) => note.id !== id));
+    }
+  };
+
   console.log(notes)
   return (
     <div className="max-w-lg mx-auto ">
@@ -19,7 +28,7 @@ const App = () => {
         <h2 className="text-2xl font-bold mb-4 text-center text-orange-500">📝 Notes App</h2>
         <NoteForm notes={notes} setNotes={setNotes} />
 
-         <NoteList notes={notes} />
+        <NoteList notes={notes} deleteNote={handleDeleteNote} />
       </div>
 
 

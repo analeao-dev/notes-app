@@ -1,6 +1,9 @@
 import Badge, { type BadgeVariant } from "./Badge";
 
-type NoteListProps = { notes: NoteType[] };
+type NoteListProps = {
+    notes: NoteType[],
+    deleteNote: (id: number) => void;
+};
 
 type NoteType = {
     id: number,
@@ -23,13 +26,7 @@ const categoryVariantMap: Record<NoteType['category'], BadgeVariant> = {
 };
 
 
-const NoteList = ({ notes }: NoteListProps) => {
-
-    // Lógica para deletar notas
-    const handleDeleteNote = (id) => {
-        const noteToDelete = notes.filter((note) => note.id === id);
-        console.log(noteToDelete);
-    }
+const NoteList = ({ notes, deleteNote }: NoteListProps) => {
     return (
         notes.length === 0
             ? (<p className="text-center">No Notes Yet</p>)
@@ -48,8 +45,9 @@ const NoteList = ({ notes }: NoteListProps) => {
                                 </Badge>
                             </div>
                             <p className="break-words whitespace-pre-wrap">{note.description}</p>
-
-                            <button className="bg-gray-200 p-2 rounded-full border-1 border-gray-300  shadow-md" onClick={() => handleDeleteNote(note.id)}>🗑️</button>
+                            <div className="flex justify-end">
+                                <button className="text-red-700 cursor-pointer" onClick={() => deleteNote(note.id)}>🗑️Delete</button>
+                            </div>
                         </div>
                     ))}
                 </div>)
