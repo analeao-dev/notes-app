@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NoteForm from "./components/NoteForm";
 import NoteList from "./components/NoteList";
 
@@ -11,7 +11,16 @@ type NoteType = {
 };
 
 const App = () => {
-  const [notes, setNotes] = useState<NoteType[]>([]);
+  const [notes, setNotes] = useState<NoteType[]>(() => {
+    const notes = localStorage.getItem("notes");
+    if (notes) {
+      return JSON.parse(notes || "[]");
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes])
 
   // "Delete" notes
   const handleDeleteNote = (id: number) => {
@@ -21,7 +30,7 @@ const App = () => {
     }
   };
 
-  console.log(notes)
+
   return (
     <div className="max-w-lg mx-auto ">
       <div className="my-10 p-6 bg-gray-200 rounded-lg shadow-lg">
