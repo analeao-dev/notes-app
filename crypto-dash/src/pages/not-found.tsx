@@ -10,7 +10,7 @@ const NotFoundPage = () => {
     );
 }
 
-const styles = {
+const styles: { [key: string]: React.CSSProperties } = {
     container: {
         textAlign: 'center',
         padding: '80px 20px',

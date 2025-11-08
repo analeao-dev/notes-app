@@ -3,6 +3,7 @@ import FilterInput from "../components/FilterInput";
 import LimitSelector from "../components/LimitSelector";
 import SortSelector from "../components/SortSelect";
 import CoinCard from "../components/CoinCard";
+import Spinner from "../components/Spinner";
 
 interface Coin {
     id: string;
@@ -57,7 +58,7 @@ const HomePage = ({ loading, error, filter, setFilter, limit, setLimit, sortBy, 
     return (
         <div>
             <h1>🚀 Crypto Dash</h1>
-            {loading && <p>Loading...</p>}
+            {loading && <Spinner />}
             {error && <div className='error'>{error}</div>}
 
             <div className='top-controls'>

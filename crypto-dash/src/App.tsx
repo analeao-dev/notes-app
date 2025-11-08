@@ -4,6 +4,7 @@ import HomePage from './pages/home';
 import AboutPage from './pages/about';
 import Header from './components/Header';
 import NotFoundPage from './pages/not-found';
+import CoinDetails from './pages/coin-details';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -67,6 +68,7 @@ const App = () => {
 						setSortBy={setSortBy}
 					/>}
 				/>
+				<Route path='/coin/:id' element={<CoinDetails />} />
 				<Route path='/about' element={<AboutPage />} />
 				<Route path='*' element={<NotFoundPage />} />
 			</Routes>
