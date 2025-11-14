@@ -19,7 +19,7 @@ const App = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("");
+        const response = await fetch("api/products");
 
         if (!response.ok)
           throw new Error("Faild to fetch products");
@@ -37,7 +37,7 @@ const App = () => {
 
     fetchProducts();
 
-  }, [products])
+  }, [])
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
