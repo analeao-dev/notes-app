@@ -1,33 +1,24 @@
 import { useEffect, useState } from "react";
-
-interface Products {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  quantity: number;
-  category: string;
-  rating: number;
-  image: string;
-}
+import ProductList from "./components/product-list";
+import type { Product } from "./types/product";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [products, setProducts] = useState<Products[]>();
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("api/products");
+        const response = await fetch("/api/products");
 
         if (!response.ok)
           throw new Error("Faild to fetch products");
 
-        const data: Products[] = await response.json();
+        const data: Product[] = await response.json();
         console.log(data);
         setProducts(data);
-      } catch (err: unknown) {
+      } catch (err) {
         if (err instanceof Error)
           setError(err.message)
       } finally {
@@ -46,7 +37,8 @@ const App = () => {
       {loading && <p>Loading...</p>}
       {error && <div className="error">❌ {error}</div>}
 
-      <div className="grid gris-cols-1">
+      <div className="grid gris-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <ProductList products={products} />      
       </div>
     </div>
   );
