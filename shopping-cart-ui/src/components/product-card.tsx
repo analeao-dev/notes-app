@@ -14,6 +14,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             <h2 className="text-xl font-semibold">{product.name}</h2>
             <p className="text-gray-500 text-sm mb-2">{product.description}</p>
             <p className="font-bold text-lg">{product.price.toFixed(2)}</p>
+            <button className="bg-blue-700 rounded p-2 text-white font-semibold cursor-pointer">Add to Cart</button>
         </div>
     );
 }
