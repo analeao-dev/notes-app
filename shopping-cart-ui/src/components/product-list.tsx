@@ -1,18 +1,15 @@
-import type { Product } from "../types/product";
+import { useProducts } from "../context/product-context";
 import ProductCard from "./product-card";
 
-interface ProductListProps {
-    products: Product[];
-}
-
-const ProductList = ({ products }: ProductListProps) => {
+const ProductList = () => {
+    const {products, loading, error} = useProducts();
     return (
         <>
-            {products && (
-                products.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                ))
-            )}
+            {loading && <p>Loading...</p>}
+            {error && <div className="error">❌ {error}</div>}
+            {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+            ))}
         </>
     );
 }
